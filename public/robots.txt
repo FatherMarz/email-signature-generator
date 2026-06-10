@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://email-signature.modul4r.com/sitemap.xml
+Sitemap: https://siggy.modul4r.com/sitemap.xml

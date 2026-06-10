@@ -2,7 +2,7 @@
 
 A free, no-signup email signature generator. Fill in your details, pick a template, copy, paste into Gmail or Outlook.
 
-Live at **[email-signature.modul4r.com](https://email-signature.modul4r.com)**.
+Live at **[siggy.modul4r.com](https://siggy.modul4r.com)**.
 
 > I like making small things I can use all the time.
 
