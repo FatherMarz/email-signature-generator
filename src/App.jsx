@@ -347,7 +347,7 @@ function App() {
       <main className="container">
         <div className="masthead no-print">
           <span className="eyebrow">Email Signatures</span>
-          <h1>Make a clean email signature</h1>
+          <h1>Make a Clean Email Signature</h1>
           <p className="sub">
             Fill it in, pick a template, copy, paste into Gmail or Outlook. Free, no signup,
             and nothing ever leaves your browser.
@@ -428,7 +428,7 @@ function App() {
 
               {(template === 'stacked' || template === 'card') && (
                 <div className="field">
-                  <span className="field-label">Accent color</span>
+                  <span className="field-label">Accent Color</span>
                   <div className="accent-row">
                     {ACCENTS.map((c) => (
                       <button
@@ -455,13 +455,13 @@ function App() {
 
           <section className="preview-col">
             <div className="preview-head no-print">
-              <span className="preview-tag">Live preview</span>
+              <span className="preview-tag">Live Preview</span>
               <div className="preview-actions">
                 <button type="button" className="ghost" onClick={copyHtml}>
                   Copy HTML
                 </button>
                 <button type="button" className="primary" onClick={copySignature}>
-                  {copied ? 'Copied ✓' : 'Copy signature'}
+                  {copied ? 'Copied ✓' : 'Copy Signature'}
                 </button>
               </div>
             </div>
@@ -473,7 +473,7 @@ function App() {
             </div>
 
             <p className="note no-print">
-              "Copy signature" puts the formatted signature on your clipboard. In Gmail:
+              "Copy Signature" puts the formatted signature on your clipboard. In Gmail:
               Settings → General → Signature, then paste. In Outlook: paste into the signature
               editor.
             </p>
@@ -488,7 +488,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          A modul4r tool · <strong>modul4r.com</strong> →
+          A Modul4r Tool · <strong>modul4r.com</strong> →
         </a>
         <span>Modul4r</span>
       </footer>
