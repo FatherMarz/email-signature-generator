@@ -1,0 +1,19 @@
+{
+  "name": "Modul4r Email Signature Generator",
+  "short_name": "Signature",
+  "description": "Create a clean, minimal email signature in seconds. Free, no signup, runs in your browser.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f5f5f5",
+  "theme_color": "#111111",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
