@@ -1,15 +1,54 @@
 import { useRef, useState } from 'react'
 import './App.css'
 
-const DEFAULT_AVATAR =
-  "data:image/svg+xml;utf8," +
-  encodeURIComponent(
-    "<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'>" +
-      "<rect width='200' height='200' fill='#e9e9e9'/>" +
-      "<circle cx='100' cy='78' r='38' fill='#bdbdbd'/>" +
-      "<path d='M40 178c0-33 27-54 60-54s60 21 60 54z' fill='#bdbdbd'/>" +
-      "</svg>",
-  )
+/* Filler example data is randomized on every page load. */
+const FIRST_NAMES = [
+  'Maya', 'Liam', 'Sofia', 'Noah', 'Amara', 'Ethan', 'Priya', 'Lucas',
+  'Zoe', 'Mateo', 'Nina', 'Omar', 'Ava', 'Kai', 'Leila', 'Diego',
+  'Hana', 'Marcus', 'Yuki', 'Elena', 'Idris', 'Clara', 'Theo', 'Aisha',
+]
+
+const LAST_NAMES = [
+  'Okonkwo', 'Reyes', 'Larsson', 'Nakamura', 'Costa', 'Bauer', 'Haddad', 'Moreno',
+  'Petrova', 'Singh', 'Fischer', 'Romano', 'Dubois', 'Kowalski', 'Mensah', 'Ito',
+  'Novak', 'Andersen', 'Khan', 'Silva', 'Vance', 'Holt', 'Brenner', 'Quinn',
+]
+
+const ROLES = [
+  'Founder', 'CEO', 'Product Designer', 'Software Engineer', 'Creative Director',
+  'Photographer', 'Writer', 'Founder & CEO', 'Head of Design', 'Marketing Lead',
+  'Illustrator', 'Architect',
+]
+
+const CITIES = [
+  'Berlin, Germany', 'Austin, USA', 'Toronto, Canada', 'Lisbon, Portugal',
+  'Melbourne, Australia', 'Amsterdam, Netherlands', 'Kyoto, Japan', 'Nairobi, Kenya',
+  'Montréal, Canada', 'Copenhagen, Denmark', 'Mexico City, Mexico', 'Singapore',
+]
+
+const TLDS = ['com', 'co', 'studio', 'design', 'dev', 'works']
+
+const AVATAR_BG = 'b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf,c1e1c5,f1e0b0'
+
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)]
+
+function randomPersona() {
+  const first = pick(FIRST_NAMES)
+  const last = pick(LAST_NAMES)
+  const name = `${first} ${last}`
+  const domain = `${first}${last}`.toLowerCase() + '.' + pick(TLDS)
+  return {
+    image: `https://api.dicebear.com/9.x/notionists/png?seed=${encodeURIComponent(
+      name,
+    )}&backgroundColor=${AVATAR_BG}`,
+    name,
+    role: pick(ROLES),
+    email: `${first.toLowerCase()}@${domain}`,
+    phone: '',
+    address: pick(CITIES),
+    link: `https://${domain}`,
+  }
+}
 
 const ACCENTS = ['#111827', '#c98c4f', '#2563eb', '#059669', '#dc2626', '#7c3aed']
 
@@ -245,16 +284,7 @@ function Field({ label, value, onChange, onBlur, placeholder, type = 'text' }) {
 
 function App() {
   const [template, setTemplate] = useState('classic')
-  const [data, setData] = useState({
-    image: DEFAULT_AVATAR,
-    name: 'Tom Cook',
-    role: 'CEO',
-    email: 'email@amazingdomain.com',
-    phone: '',
-    address: 'Address, City, Country',
-    link: 'https://amazingdomain.com',
-    accent: ACCENTS[0],
-  })
+  const [data, setData] = useState(() => ({ ...randomPersona(), accent: ACCENTS[0] }))
   const [copied, setCopied] = useState(false)
   const previewRef = useRef(null)
 
@@ -396,28 +426,30 @@ function App() {
                 placeholder="https://domain.com"
               />
 
-              <div className="field">
-                <span className="field-label">Accent · Stacked &amp; Card</span>
-                <div className="accent-row">
-                  {ACCENTS.map((c) => (
-                    <button
-                      key={c}
-                      type="button"
-                      className={`swatch${data.accent === c ? ' is-active' : ''}`}
-                      style={{ backgroundColor: c }}
-                      onClick={() => set('accent')(c)}
-                      aria-label={`Accent ${c}`}
+              {(template === 'stacked' || template === 'card') && (
+                <div className="field">
+                  <span className="field-label">Accent color</span>
+                  <div className="accent-row">
+                    {ACCENTS.map((c) => (
+                      <button
+                        key={c}
+                        type="button"
+                        className={`swatch${data.accent === c ? ' is-active' : ''}`}
+                        style={{ backgroundColor: c }}
+                        onClick={() => set('accent')(c)}
+                        aria-label={`Accent ${c}`}
+                      />
+                    ))}
+                    <input
+                      type="color"
+                      className="swatch-picker"
+                      value={data.accent}
+                      onChange={(e) => set('accent')(e.target.value)}
+                      aria-label="Custom accent color"
                     />
-                  ))}
-                  <input
-                    type="color"
-                    className="swatch-picker"
-                    value={data.accent}
-                    onChange={(e) => set('accent')(e.target.value)}
-                    aria-label="Custom accent color"
-                  />
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </section>
 
